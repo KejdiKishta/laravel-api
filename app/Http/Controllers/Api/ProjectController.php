@@ -18,7 +18,7 @@ class ProjectController extends Controller
     }
 
     public function show(string $slug) {
-        $project = Project::where('slug', $slug)->with(['tecnology', 'type'])->first();
+        $project = Project::with(['tecnologies', 'type'])->where('slug', $slug)->first();
 
         if (!$project) {
             return response()->json(['result' => false], 404);
