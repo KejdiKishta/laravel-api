@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
 
             <div class="form-group py-3">
@@ -45,11 +45,12 @@
                 @enderror
             </div>
 
-            <div class="mb-2">Tags:</div>
+            <div class="mb-2">Tags</div>
             <div class="btn-group" role="group">
                 @foreach ($tags as $tag)
-                    <input @checked(in_array($tag->id, old('tags', []))) name="tags[]" value="{{ $tag->id }}" type="checkbox" 
-                        class="btn-check @error('tags') is-invalid @enderror" id="tag-{{ $tag->id }}" autocomplete="off">
+                    <input @checked(in_array($tag->id, old('tags', []))) name="tags[]" value="{{ $tag->id }}" type="checkbox"
+                        class="btn-check @error('tags') is-invalid @enderror" id="tag-{{ $tag->id }}"
+                        autocomplete="off">
                     <label class="btn btn-outline-primary" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
                 @endforeach
             </div>
@@ -64,6 +65,11 @@
                 @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="form-group py-3">
+                <label for="thumb" class="thumb">Select a thumbnail for your project</label>
+                <input class="form-control" name="thumbnail" type="file" id="thumb">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

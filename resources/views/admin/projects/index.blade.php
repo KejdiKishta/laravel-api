@@ -22,6 +22,7 @@
                 <hr>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Thumb</th>
                     <th scope="col">Title</th>
                     <th scope="col">Type</th>
                     <th scope="col">Owner</th>
@@ -35,6 +36,13 @@
                     <tr class="ms_click" data-href="{{ route('admin.projects.show', ['project' => $item->slug]) }}">
                         {{-- <a href="{{ route('admin.projects.show', ['project' => $item->slug]) }}"> --}}
                             <th scope="row">{{ $loop->iteration }}</th>
+                            <td>
+                                @if ($item->thumbnail)
+                                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="#" style="width: 50px">
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->type?->name }}</td>
                             <td>{{ $item->owner }}</td>

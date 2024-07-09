@@ -4,7 +4,7 @@
     <div class="container p-5">
         <h1>Edit: {{ $project->title }}</h1>
 
-        <form action="{{ route('admin.projects.update', ['project' => $project->slug]) }}" method="POST">
+        <form action="{{ route('admin.projects.update', ['project' => $project->slug]) }}" enctype="multipart/form-data" method="POST">
             @csrf 
             @method('PUT')
 
@@ -61,6 +61,12 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="form-group py-3">
+                <label for="formFile" class="form-label">Edit your thumbnail</label>
+                <input class="form-control" name="thumbnail" value="{{ $project->thumbnail }}" type="file" id="formFile">
+            </div>
+
             <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-outline-secondary" href="{{ route('admin.projects.index') }}">Return</a>
         </form>
